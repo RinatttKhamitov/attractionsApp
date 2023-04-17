@@ -16,8 +16,6 @@ namespace attractionsApp
         public Authorization()
         {
             InitializeComponent();
-            MySqlConnection connection = new MySqlConnection("server=localhost;user=root;database=attractions_db;password=0000;");
-            connection.Open();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -44,15 +42,23 @@ namespace attractionsApp
 
             adapter.SelectCommand = command;
             adapter.Fill(table);
+           
 
             if (table.Rows.Count > 0)
             {
-                MessageBox.Show("1");
+                MainWindow form1 = new MainWindow();
+                form1.Show();
             }
             else
             {
                 MessageBox.Show("2");
             }
+        }
+
+        private void btnRegister_Click(object sender, EventArgs e)
+        {
+            Registration reg = new Registration();
+            reg.Show();
         }
     }
 }
