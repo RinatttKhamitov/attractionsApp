@@ -27,6 +27,7 @@ namespace attractionsApp
             GetInfoForAddAttraction();
 
         }
+        private List<PictureBox> pictureBoxes = new List<PictureBox>();
 
         public void GetInfoForAddAttraction()
         {
@@ -56,7 +57,7 @@ namespace attractionsApp
 
         public void AddAttractionPanel( int id, string name, string path)
         {
-
+            
             // создание элемента изображение
             PictureBox pictureBox = new PictureBox();
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -99,6 +100,7 @@ namespace attractionsApp
             pictureBoxFavorites.TabStop = false;
             pictureBoxFavorites.Image = GetImage(id);
             pictureBoxFavorites.Click += new EventHandler(pictureBoxFavorites_Click);
+            pictureBoxes.Add(pictureBoxFavorites);
 
             // создание элементы id 
             Label lblId = new Label();
@@ -182,6 +184,10 @@ namespace attractionsApp
 
         private void pictureBoxFavorites_Click(object sender, EventArgs e)
         {
+
+
+
+
             PictureBox pictureBox = (PictureBox)sender;
             string[] idSt = pictureBox.Name.Split(' ');
             int id_attraction = int.Parse(idSt[idSt.Length - 1]);
@@ -221,7 +227,15 @@ namespace attractionsApp
                     command.Parameters.Add("@i", MySqlDbType.Int32).Value = id;
                     if (command.ExecuteNonQuery() == 1)
                     {
-                        UpdateForm();
+                        foreach (PictureBox picture in pictureBoxes)
+                        {
+                            string[] idSt2 = picture.Name.Split(' ');
+                            int id_attraction2 = int.Parse(idSt2[idSt2.Length - 1]);
+                            if (id_attraction2 == id_attraction)
+                            {
+                                picture.Image = Properties.Resources.black;
+                            }
+                        }
                     }
 
 
@@ -234,7 +248,15 @@ namespace attractionsApp
                     command.Parameters.Add("@i", MySqlDbType.Int32).Value = id;
                     if (command.ExecuteNonQuery() == 1)
                     {
-                        UpdateForm();
+                        foreach (PictureBox picture in pictureBoxes)
+                        {
+                            string[] idSt2 = picture.Name.Split(' ');
+                            int id_attraction2 = int.Parse(idSt2[idSt2.Length - 1]);
+                            if (id_attraction2 == id_attraction)
+                            {
+                                picture.Image = Properties.Resources.red;
+                            }
+                        }
                     }
 
                 }
@@ -249,7 +271,17 @@ namespace attractionsApp
                 command.Parameters.Add("@re", MySqlDbType.Int16).Value = 0;
                 if (command.ExecuteNonQuery() == 1)
                 {
-                    UpdateForm();
+                    foreach (PictureBox picture in pictureBoxes)
+                    {
+                        string[] idSt2 = picture.Name.Split(' ');
+                        int id_attraction2 = int.Parse(idSt2[idSt2.Length - 1]);
+                        if (id_attraction2 == id_attraction)
+                        {
+                            picture.Image = Properties.Resources.red;
+                            db.closeConnection();
+                            return;
+                        }
+                    }
                 }
             }
             adapter.SelectCommand = command;
