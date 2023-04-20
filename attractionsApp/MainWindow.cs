@@ -278,8 +278,8 @@ namespace attractionsApp
                         if (id_attraction2 == id_attraction)
                         {
                             picture.Image = Properties.Resources.red;
-                            db.closeConnection();
-                            return;
+                             return;
+                           db.closeConnection();
                         }
                     }
                 }
