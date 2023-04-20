@@ -155,7 +155,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\red.png" />
     <None Include="Resources\icon.png" />
+    <None Include="Resources\black.png" />
     <Content Include="Resources\kazanKreml.jpg" />
   </ItemGroup>
   <ItemGroup>

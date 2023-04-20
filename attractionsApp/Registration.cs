@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -45,12 +46,13 @@ namespace attractionsApp
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
+
             string textUser = textBoxUser.Text;
             string textPassword = textBoxPassword.Text;
             string textMail = textBoxMail.Text;
 
             DBcon db = new DBcon();
-
+            db.openConnection();
 
             MySqlDataAdapter adapter = new MySqlDataAdapter();
 
@@ -59,7 +61,7 @@ namespace attractionsApp
             command.Parameters.Add("@uP", MySqlDbType.VarChar).Value = textPassword;
             command.Parameters.Add("@uM", MySqlDbType.VarChar).Value = textMail;
             adapter.SelectCommand = command;
-            db.openConnection();
+
 
             if (command.ExecuteNonQuery() == 1)
             {

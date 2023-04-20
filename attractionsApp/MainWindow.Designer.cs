@@ -30,26 +30,26 @@
         {
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel = new System.Windows.Forms.Panel();
-            this.lblId = new System.Windows.Forms.Label();
+            this.pictureBoxFavorites = new System.Windows.Forms.PictureBox();
             this.linkLblMoreInfo = new System.Windows.Forms.LinkLabel();
             this.lblName = new System.Windows.Forms.Label();
+            this.pictureBox = new System.Windows.Forms.PictureBox();
             this.linkLblAddNewAttraction = new System.Windows.Forms.LinkLabel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBoxFavorites = new System.Windows.Forms.PictureBox();
-            this.pictureBox = new System.Windows.Forms.PictureBox();
             this.lblFilter = new System.Windows.Forms.Label();
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.lblCity = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.linkLblFavorites = new System.Windows.Forms.LinkLabel();
             this.linkLblWantToVisit = new System.Windows.Forms.LinkLabel();
+            this.button1 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel.SuspendLayout();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFavorites)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -58,6 +58,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flowLayoutPanel1.Controls.Add(this.panel);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(227, 72);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -67,7 +68,6 @@
             // panel
             // 
             this.panel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel.Controls.Add(this.lblId);
             this.panel.Controls.Add(this.pictureBoxFavorites);
             this.panel.Controls.Add(this.linkLblMoreInfo);
             this.panel.Controls.Add(this.lblName);
@@ -77,15 +77,14 @@
             this.panel.Size = new System.Drawing.Size(215, 175);
             this.panel.TabIndex = 3;
             // 
-            // lblId
+            // pictureBoxFavorites
             // 
-            this.lblId.AutoSize = true;
-            this.lblId.Location = new System.Drawing.Point(131, 156);
-            this.lblId.Name = "lblId";
-            this.lblId.Size = new System.Drawing.Size(13, 13);
-            this.lblId.TabIndex = 4;
-            this.lblId.Text = "1";
-            this.lblId.Visible = false;
+            this.pictureBoxFavorites.Location = new System.Drawing.Point(186, 143);
+            this.pictureBoxFavorites.Name = "pictureBoxFavorites";
+            this.pictureBoxFavorites.Size = new System.Drawing.Size(26, 26);
+            this.pictureBoxFavorites.TabIndex = 3;
+            this.pictureBoxFavorites.TabStop = false;
+            this.pictureBoxFavorites.Click += new System.EventHandler(this.pictureBoxFavorites_Click);
             // 
             // linkLblMoreInfo
             // 
@@ -107,6 +106,15 @@
             this.lblName.Size = new System.Drawing.Size(35, 13);
             this.lblName.TabIndex = 1;
             this.lblName.Text = "label1";
+            // 
+            // pictureBox
+            // 
+            this.pictureBox.Location = new System.Drawing.Point(-1, -3);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(215, 140);
+            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox.TabIndex = 0;
+            this.pictureBox.TabStop = false;
             // 
             // linkLblAddNewAttraction
             // 
@@ -141,23 +149,6 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            // 
-            // pictureBoxFavorites
-            // 
-            this.pictureBoxFavorites.Location = new System.Drawing.Point(186, 143);
-            this.pictureBoxFavorites.Name = "pictureBoxFavorites";
-            this.pictureBoxFavorites.Size = new System.Drawing.Size(26, 26);
-            this.pictureBoxFavorites.TabIndex = 3;
-            this.pictureBoxFavorites.TabStop = false;
-            // 
-            // pictureBox
-            // 
-            this.pictureBox.Location = new System.Drawing.Point(-1, -3);
-            this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(215, 140);
-            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox.TabIndex = 0;
-            this.pictureBox.TabStop = false;
             // 
             // lblFilter
             // 
@@ -221,11 +212,22 @@
             this.linkLblWantToVisit.TabStop = true;
             this.linkLblWantToVisit.Text = "Хочу посетить";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(126, 84);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(716, 450);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.linkLblWantToVisit);
             this.Controls.Add(this.linkLblFavorites);
             this.Controls.Add(this.comboBox1);
@@ -241,10 +243,10 @@
             this.flowLayoutPanel1.ResumeLayout(false);
             this.panel.ResumeLayout(false);
             this.panel.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFavorites)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
+            this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -258,7 +260,6 @@
         private System.Windows.Forms.LinkLabel linkLblMoreInfo;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.PictureBox pictureBox;
-        private System.Windows.Forms.Label lblId;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lblFilter;
@@ -267,6 +268,7 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.LinkLabel linkLblFavorites;
         private System.Windows.Forms.LinkLabel linkLblWantToVisit;
+        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -68,6 +68,7 @@ namespace attractionsApp
             DBcon db = new DBcon();
 
             MySqlDataAdapter adapter = new MySqlDataAdapter();
+            db.openConnection();
             string[] spPath = path.Split('\\');
             string nameFile = spPath[spPath.Length - 1];
             MySqlCommand command = new MySqlCommand("INSERT INTO `attractions_db`.`attractions` (`name`, `image`, `description`,  `adress`, `museum`, `monument`, `church`, `park`, `nature`, `mall`) VALUES (@aN, @aI, @aD, @aA, @aMu, @aMo, @aC, @aP, @aNa, @aMa)", db.getConnection());
@@ -84,7 +85,6 @@ namespace attractionsApp
             command.Parameters.Add("@aMa", MySqlDbType.VarChar).Value = select[5];
 
             adapter.SelectCommand = command;
-            db.openConnection();
 
             if (command.ExecuteNonQuery() == 1)
             {
