@@ -30,26 +30,25 @@
         {
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel = new System.Windows.Forms.Panel();
-            this.pictureBoxFavorites = new System.Windows.Forms.PictureBox();
             this.linkLblMoreInfo = new System.Windows.Forms.LinkLabel();
             this.lblName = new System.Windows.Forms.Label();
-            this.pictureBox = new System.Windows.Forms.PictureBox();
             this.linkLblAddNewAttraction = new System.Windows.Forms.LinkLabel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblFilter = new System.Windows.Forms.Label();
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.lblCity = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.linkLblFavorites = new System.Windows.Forms.LinkLabel();
-            this.linkLblWantToVisit = new System.Windows.Forms.LinkLabel();
             this.button1 = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxFavorites = new System.Windows.Forms.PictureBox();
+            this.pictureBox = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFavorites)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFavorites)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -77,15 +76,6 @@
             this.panel.Size = new System.Drawing.Size(215, 175);
             this.panel.TabIndex = 3;
             // 
-            // pictureBoxFavorites
-            // 
-            this.pictureBoxFavorites.Location = new System.Drawing.Point(186, 143);
-            this.pictureBoxFavorites.Name = "pictureBoxFavorites";
-            this.pictureBoxFavorites.Size = new System.Drawing.Size(26, 26);
-            this.pictureBoxFavorites.TabIndex = 3;
-            this.pictureBoxFavorites.TabStop = false;
-            this.pictureBoxFavorites.Click += new System.EventHandler(this.pictureBoxFavorites_Click);
-            // 
             // linkLblMoreInfo
             // 
             this.linkLblMoreInfo.AutoSize = true;
@@ -106,15 +96,6 @@
             this.lblName.Size = new System.Drawing.Size(35, 13);
             this.lblName.TabIndex = 1;
             this.lblName.Text = "label1";
-            // 
-            // pictureBox
-            // 
-            this.pictureBox.Location = new System.Drawing.Point(-1, -3);
-            this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(215, 140);
-            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox.TabIndex = 0;
-            this.pictureBox.TabStop = false;
             // 
             // linkLblAddNewAttraction
             // 
@@ -139,16 +120,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(721, 68);
             this.panel1.TabIndex = 4;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::attractionsApp.Properties.Resources.icon;
-            this.pictureBox1.Location = new System.Drawing.Point(10, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(48, 48);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
             // 
             // lblFilter
             // 
@@ -199,28 +170,46 @@
             this.linkLblFavorites.TabIndex = 8;
             this.linkLblFavorites.TabStop = true;
             this.linkLblFavorites.Text = "Избранное";
-            // 
-            // linkLblWantToVisit
-            // 
-            this.linkLblWantToVisit.ActiveLinkColor = System.Drawing.Color.Red;
-            this.linkLblWantToVisit.AutoSize = true;
-            this.linkLblWantToVisit.LinkColor = System.Drawing.Color.DarkRed;
-            this.linkLblWantToVisit.Location = new System.Drawing.Point(12, 323);
-            this.linkLblWantToVisit.Name = "linkLblWantToVisit";
-            this.linkLblWantToVisit.Size = new System.Drawing.Size(79, 13);
-            this.linkLblWantToVisit.TabIndex = 9;
-            this.linkLblWantToVisit.TabStop = true;
-            this.linkLblWantToVisit.Text = "Хочу посетить";
+            this.linkLblFavorites.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLblFavorites_LinkClicked);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(126, 84);
+            this.button1.Location = new System.Drawing.Point(189, 76);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(32, 23);
             this.button1.TabIndex = 10;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::attractionsApp.Properties.Resources.icon;
+            this.pictureBox1.Location = new System.Drawing.Point(10, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(48, 48);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // pictureBoxFavorites
+            // 
+            this.pictureBoxFavorites.Location = new System.Drawing.Point(186, 143);
+            this.pictureBoxFavorites.Name = "pictureBoxFavorites";
+            this.pictureBoxFavorites.Size = new System.Drawing.Size(26, 26);
+            this.pictureBoxFavorites.TabIndex = 3;
+            this.pictureBoxFavorites.TabStop = false;
+            this.pictureBoxFavorites.Click += new System.EventHandler(this.pictureBoxFavorites_Click);
+            // 
+            // pictureBox
+            // 
+            this.pictureBox.Location = new System.Drawing.Point(-1, -3);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(215, 140);
+            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox.TabIndex = 0;
+            this.pictureBox.TabStop = false;
             // 
             // MainWindow
             // 
@@ -228,7 +217,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(716, 450);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.linkLblWantToVisit);
             this.Controls.Add(this.linkLblFavorites);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.lblCity);
@@ -243,10 +231,10 @@
             this.flowLayoutPanel1.ResumeLayout(false);
             this.panel.ResumeLayout(false);
             this.panel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFavorites)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFavorites)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -267,7 +255,6 @@
         private System.Windows.Forms.Label lblCity;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.LinkLabel linkLblFavorites;
-        private System.Windows.Forms.LinkLabel linkLblWantToVisit;
         private System.Windows.Forms.Button button1;
     }
 }

@@ -1,39 +1,66 @@
 ﻿using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI.Relational;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.Common;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
-using Org.BouncyCastle.Utilities;
-using System.Drawing;
-using static System.Net.Mime.MediaTypeNames;
-using MySqlX.XDevAPI.Relational;
-using System.Xml.Linq;
 
 namespace attractionsApp
 {
-    public partial class MainWindow : Form
+    public partial class Favorites : Form
     {
-        public MainWindow()
+        public Favorites()
         {
             InitializeComponent();
             GetInfoForAddAttraction();
-
         }
         private List<PictureBox> pictureBoxes = new List<PictureBox>();
 
         public void GetInfoForAddAttraction()
         {
+            int id_user;
+            using (StreamReader readerr = new StreamReader($"..\\..\\Resources\\account.txt"))
+            {
+                string text = readerr.ReadLine().Split(';')[0];
+                id_user = int.Parse(text);
+            }
+
+            // асинхронное чтение
             DBcon db = new DBcon();
             db.openConnection();
-            MySqlCommand command = new MySqlCommand("SELECT * FROM attractions", db.getConnection()); // sql комманда
+
+            DataTable table = new DataTable();
+
+            MySqlDataAdapter adapter = new MySqlDataAdapter();
+
+            MySqlCommand command = new MySqlCommand("SELECT * FROM favorites WHERE id_user = @uI AND removed = @re", db.getConnection());
+            command.Parameters.Add("@uI", MySqlDbType.Int32).Value = id_user;
+            command.Parameters.Add("@re", MySqlDbType.Int32).Value = 0;
+
+
+
+            adapter.SelectCommand = command;
+            adapter.Fill(table);
+
+            List<int> ids = new List<int>();
+
+            foreach (DataRow row in table.Rows)
+            {
+                int id = Convert.ToInt32(row["id_attraction"]);
+                ids.Add(id);
+                
+            }
+            db.closeConnection();
+            db.openConnection();
+
+            string query = "SELECT * FROM attractions WHERE id IN (" + string.Join(", ", ids.ToArray()) + ")";
+            command = new MySqlCommand(query, db.getConnection()); // sql комманда
             MySqlDataReader reader = command.ExecuteReader();
             MySqlDataReader s;
             // путь к файлу
@@ -54,10 +81,9 @@ namespace attractionsApp
 
             db.closeConnection();
         }
-
-        public void AddAttractionPanel( int id, string name, string path)
+        public void AddAttractionPanel(int id, string name, string path)
         {
-            
+
             // создание элемента изображение
             PictureBox pictureBox = new PictureBox();
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -101,7 +127,6 @@ namespace attractionsApp
             pictureBoxFavorites.Image = GetImage(id);
             pictureBoxFavorites.Click += new EventHandler(pictureBoxFavorites_Click);
             pictureBoxes.Add(pictureBoxFavorites);
-
 
             // lblId.Visible = false;
 
@@ -156,23 +181,11 @@ namespace attractionsApp
             }
 
         }
-        private void linkLblAddNewAttraction_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            AddNewAttraction addNewAttraction = new AddNewAttraction();
-            addNewAttraction.Show();
-        }
-
         private void linkLblMoreInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            LinkLabel lbl = (LinkLabel)sender;
-            string[] Text = lbl.Name.ToString().Split(' ');
+            string[] Text = sender.ToString().Split(' ');
             DetailedInformation detailedInformation = new DetailedInformation(int.Parse(Text[Text.Length - 1]));
             detailedInformation.Show();
-        }
-
-        private void MainWindow_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void pictureBoxFavorites_Click(object sender, EventArgs e)
@@ -267,8 +280,8 @@ namespace attractionsApp
                         if (id_attraction2 == id_attraction)
                         {
                             picture.Image = Properties.Resources.red;
-                             return;
-                           db.closeConnection();
+                            return;
+                            db.closeConnection();
                         }
                     }
                 }
@@ -276,33 +289,6 @@ namespace attractionsApp
             adapter.SelectCommand = command;
             db.closeConnection();
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            UpdateForm();
-        }
-
-        private void UpdateForm()
-        {
-            flowLayoutPanel1.Controls.Clear();
-            GetInfoForAddAttraction();
-        }
-
-        private void linkLblWantToVisit_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-
-        }
-
-        private void linkLblFavorites_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Favorites favorites = new Favorites();
-            favorites.Show();
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            Profile profile = new Profile();
-            profile.Show();
-        }
     }
+    
 }

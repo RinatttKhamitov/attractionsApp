@@ -100,6 +100,12 @@
     <Compile Include="DetailedInformation.Designer.cs">
       <DependentUpon>DetailedInformation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Favorites.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Favorites.Designer.cs">
+      <DependentUpon>Favorites.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +113,12 @@
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="DBcon.cs" />
+    <Compile Include="Profile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Profile.Designer.cs">
+      <DependentUpon>Profile.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registration.cs">
@@ -124,8 +136,14 @@
     <EmbeddedResource Include="DetailedInformation.resx">
       <DependentUpon>DetailedInformation.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Favorites.resx">
+      <DependentUpon>Favorites.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Profile.resx">
+      <DependentUpon>Profile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
