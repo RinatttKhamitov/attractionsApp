@@ -52,6 +52,7 @@
             // 
             // pictureBox
             // 
+            this.pictureBox.Image = global::attractionsApp.Properties.Resources.caption;
             this.pictureBox.Location = new System.Drawing.Point(47, 23);
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.Size = new System.Drawing.Size(201, 141);
@@ -130,7 +131,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(307, 433);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
+            this.ClientSize = new System.Drawing.Size(307, 450);
             this.Controls.Add(this.btnAddFav);
             this.Controls.Add(this.btnWantToVisit);
             this.Controls.Add(this.labelAdress);

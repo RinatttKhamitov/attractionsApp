@@ -304,5 +304,11 @@ namespace attractionsApp
             Profile profile = new Profile();
             profile.Show();
         }
+
+        private void pictureBoxUpdate_Click(object sender, EventArgs e)
+        {
+            flowLayoutPanel1.Controls.Clear();
+            GetInfoForAddAttraction();
+        }
     }
 }

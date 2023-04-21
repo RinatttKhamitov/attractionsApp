@@ -176,6 +176,8 @@
     <None Include="Resources\red.png" />
     <None Include="Resources\icon.png" />
     <None Include="Resources\black.png" />
+    <None Include="Resources\caption.jpg" />
+    <None Include="Resources\88016.png" />
     <Content Include="Resources\kazanKreml.jpg" />
   </ItemGroup>
   <ItemGroup>
