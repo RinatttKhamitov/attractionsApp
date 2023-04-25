@@ -33,7 +33,7 @@ namespace attractionsApp
         {
             DBcon db = new DBcon();
             db.openConnection();
-            MySqlCommand command = new MySqlCommand("SELECT * FROM attractions", db.getConnection()); // sql комманда
+            MySqlCommand command = new MySqlCommand("SELECT * FROM attractions WHERE removed = 0", db.getConnection()); // sql комманда
             MySqlDataReader reader = command.ExecuteReader();
             MySqlDataReader s;
             // путь к файлу

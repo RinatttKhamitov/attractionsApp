@@ -84,6 +84,7 @@
             this.btnAddedObject.TabIndex = 3;
             this.btnAddedObject.Text = "добавленные элементы";
             this.btnAddedObject.UseVisualStyleBackColor = true;
+            this.btnAddedObject.Click += new System.EventHandler(this.btnAddedObject_Click);
             // 
             // linkLblChangeIcon
             // 
@@ -96,6 +97,7 @@
             this.linkLblChangeIcon.TabIndex = 4;
             this.linkLblChangeIcon.TabStop = true;
             this.linkLblChangeIcon.Text = "поменять изображение";
+            this.linkLblChangeIcon.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLblChangeIcon_LinkClicked);
             // 
             // textBox1
             // 
@@ -175,6 +177,7 @@
             this.Controls.Add(this.lblLoginUser);
             this.Name = "Profile";
             this.Text = "Profile";
+            this.Load += new System.EventHandler(this.Profile_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
