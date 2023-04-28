@@ -73,6 +73,7 @@
             this.btnReady.TabIndex = 2;
             this.btnReady.Text = "готово";
             this.btnReady.UseVisualStyleBackColor = true;
+            this.btnReady.Click += new System.EventHandler(this.btnReady_Click);
             // 
             // btnAddedObject
             // 

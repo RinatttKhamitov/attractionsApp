@@ -35,7 +35,6 @@ namespace attractionsApp
                     // and assign that to the PictureBox.Image property
                     path = dlg.FileName;
                     pictureBox.Image = new Bitmap(dlg.FileName);
-
                 }
             }
         }

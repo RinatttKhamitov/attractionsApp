@@ -121,7 +121,8 @@ namespace attractionsApp
         
         private void linkLblMoreInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            string[] Text = sender.ToString().Split(' ');
+            LinkLabel lb = (LinkLabel)sender;
+            string[] Text = lb.Name.ToString().Split(' ');
             DetailedInformation detailedInformation = new DetailedInformation(int.Parse(Text[Text.Length - 1]));
             detailedInformation.Show();
         }

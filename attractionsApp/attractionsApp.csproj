@@ -100,6 +100,7 @@
     <Compile Include="Authorization.Designer.cs">
       <DependentUpon>Authorization.cs</DependentUpon>
     </Compile>
+    <Compile Include="Filter.cs" />
     <Compile Include="DetailedInformation.cs">
       <SubType>Form</SubType>
     </Compile>
