@@ -36,6 +36,8 @@
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.linkLblAddNewAttraction = new System.Windows.Forms.LinkLabel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnGetFiler = new System.Windows.Forms.Button();
+            this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblFilter = new System.Windows.Forms.Label();
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
@@ -43,7 +45,7 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.linkLblFavorites = new System.Windows.Forms.LinkLabel();
             this.pictureBoxUpdate = new System.Windows.Forms.PictureBox();
-            this.btnGetFiler = new System.Windows.Forms.Button();
+            this.linkLblRecommended = new System.Windows.Forms.LinkLabel();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFavorites)).BeginInit();
@@ -59,7 +61,6 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flowLayoutPanel1.Controls.Add(this.panel);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(227, 72);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -119,10 +120,9 @@
             // 
             // linkLblAddNewAttraction
             // 
-            this.linkLblAddNewAttraction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.linkLblAddNewAttraction.AutoSize = true;
             this.linkLblAddNewAttraction.LinkColor = System.Drawing.Color.DarkRed;
-            this.linkLblAddNewAttraction.Location = new System.Drawing.Point(8, 313);
+            this.linkLblAddNewAttraction.Location = new System.Drawing.Point(8, 312);
             this.linkLblAddNewAttraction.Name = "linkLblAddNewAttraction";
             this.linkLblAddNewAttraction.Size = new System.Drawing.Size(130, 13);
             this.linkLblAddNewAttraction.TabIndex = 2;
@@ -135,16 +135,37 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
+            this.panel1.Controls.Add(this.btnGetFiler);
+            this.panel1.Controls.Add(this.textBoxSearch);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Location = new System.Drawing.Point(1, 2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(721, 68);
             this.panel1.TabIndex = 4;
             // 
+            // btnGetFiler
+            // 
+            this.btnGetFiler.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGetFiler.Location = new System.Drawing.Point(669, 28);
+            this.btnGetFiler.Name = "btnGetFiler";
+            this.btnGetFiler.Size = new System.Drawing.Size(34, 23);
+            this.btnGetFiler.TabIndex = 12;
+            this.btnGetFiler.Text = "поиск";
+            this.btnGetFiler.UseVisualStyleBackColor = true;
+            this.btnGetFiler.Click += new System.EventHandler(this.btnGetFiler_Click);
+            // 
+            // textBoxSearch
+            // 
+            this.textBoxSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxSearch.Location = new System.Drawing.Point(489, 30);
+            this.textBoxSearch.Name = "textBoxSearch";
+            this.textBoxSearch.Size = new System.Drawing.Size(174, 20);
+            this.textBoxSearch.TabIndex = 1;
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::attractionsApp.Properties.Resources.icon;
-            this.pictureBox1.Location = new System.Drawing.Point(10, 3);
+            this.pictureBox1.Location = new System.Drawing.Point(10, 10);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(46, 48);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -178,6 +199,7 @@
             this.checkedListBox1.Name = "checkedListBox1";
             this.checkedListBox1.Size = new System.Drawing.Size(177, 90);
             this.checkedListBox1.TabIndex = 4;
+            this.checkedListBox1.Click += new System.EventHandler(this.checkedListBox1_Click);
             this.checkedListBox1.SelectedIndexChanged += new System.EventHandler(this.checkedListBox1_SelectedIndexChanged);
             // 
             // lblCity
@@ -193,6 +215,12 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Москва",
+            "Санкт-Петербург",
+            "Новосибирск",
+            "Екатеринбург",
+            "Казань"});
             this.comboBox1.Location = new System.Drawing.Point(11, 217);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(209, 21);
@@ -222,22 +250,25 @@
             this.pictureBoxUpdate.TabStop = false;
             this.pictureBoxUpdate.Click += new System.EventHandler(this.pictureBoxUpdate_Click);
             // 
-            // btnGetFiler
+            // linkLblRecommended
             // 
-            this.btnGetFiler.Location = new System.Drawing.Point(15, 256);
-            this.btnGetFiler.Name = "btnGetFiler";
-            this.btnGetFiler.Size = new System.Drawing.Size(75, 23);
-            this.btnGetFiler.TabIndex = 12;
-            this.btnGetFiler.Text = "поиск";
-            this.btnGetFiler.UseVisualStyleBackColor = true;
-            this.btnGetFiler.Click += new System.EventHandler(this.btnGetFiler_Click);
+            this.linkLblRecommended.ActiveLinkColor = System.Drawing.Color.Red;
+            this.linkLblRecommended.AutoSize = true;
+            this.linkLblRecommended.LinkColor = System.Drawing.Color.DarkRed;
+            this.linkLblRecommended.Location = new System.Drawing.Point(9, 261);
+            this.linkLblRecommended.Name = "linkLblRecommended";
+            this.linkLblRecommended.Size = new System.Drawing.Size(102, 13);
+            this.linkLblRecommended.TabIndex = 12;
+            this.linkLblRecommended.TabStop = true;
+            this.linkLblRecommended.Text = "Рекомендованные";
+            this.linkLblRecommended.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(716, 450);
-            this.Controls.Add(this.btnGetFiler);
+            this.Controls.Add(this.linkLblRecommended);
             this.Controls.Add(this.pictureBoxUpdate);
             this.Controls.Add(this.linkLblFavorites);
             this.Controls.Add(this.comboBox1);
@@ -256,6 +287,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFavorites)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUpdate)).EndInit();
             this.ResumeLayout(false);
@@ -280,6 +312,8 @@
         private System.Windows.Forms.LinkLabel linkLblFavorites;
         private System.Windows.Forms.PictureBox pictureBoxUpdate;
         private System.Windows.Forms.Button btnGetFiler;
+        private System.Windows.Forms.TextBox textBoxSearch;
+        private System.Windows.Forms.LinkLabel linkLblRecommended;
     }
 }
 

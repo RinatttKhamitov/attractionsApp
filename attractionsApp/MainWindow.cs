@@ -7,6 +7,7 @@ using System.Data.Common;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,6 +17,7 @@ using System.Drawing;
 using static System.Net.Mime.MediaTypeNames;
 using MySqlX.XDevAPI.Relational;
 using System.Xml.Linq;
+using static System.Net.WebRequestMethods;
 
 namespace attractionsApp
 {
@@ -23,13 +25,7 @@ namespace attractionsApp
     {
         public MainWindow()
         {
-            filters.Add(museum);
-            filters.Add(monument);
-            filters.Add(chruch);
-            filters.Add(park);
-            filters.Add(nature);
-            filters.Add(mall);
-
+            filters = new List<Filter>() {museum, monument, church, park, nature, mall };
             InitializeComponent();
             GetInfoForAddAttraction();
 
@@ -37,13 +33,13 @@ namespace attractionsApp
         }
 
         Filter museum = new Filter("museum","музей", 0);
-        Filter monument = new Filter("monument", "музей", 0);
-        Filter chruch = new Filter("chruch", "музей", 0);
-        Filter park = new Filter("park", "музей", 0);
-        Filter nature = new Filter("nature", "музей", 0);
-        Filter mall = new Filter("mall", "музей", 0);
-        List<Filter> filters = new List<Filter>();
-        private List<PictureBox> pictureBoxes = new List<PictureBox>();
+        Filter monument = new Filter("monument", "памятник", 0);
+        Filter church = new Filter("church", "церковь", 0);
+        Filter park = new Filter("park", "парк", 0);
+        Filter nature = new Filter("nature", "природа", 0);
+        Filter mall = new Filter("mall", "торговый центр", 0);
+        List<Filter> filters;
+        private List<PictureBox> pictureBoxes = new List<PictureBox>() { };
 
         public void GetInfoForAddAttraction()
         {
@@ -329,51 +325,47 @@ namespace attractionsApp
 
         private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (checkedListBox1.CheckedItems.Count != 0)
-            {
-                // If so, loop through all checked items and print results.  
-                string s = "";
-                for (int x = 0; x <= checkedListBox1.CheckedItems.Count - 1; x++)
-                {
-                    s = s + "Checked Item " + (x + 1).ToString() + " = " + checkedListBox1.CheckedItems[x].ToString() + "\n";
-                }
-                if (checkedListBox1.CheckedIndices.Contains(0))
-                    museum.checked_ = 1;
-                else
-                    museum.checked_ = 0;
-                if (checkedListBox1.CheckedIndices.Contains(1))
-                    monument.checked_ = 1;
-                else
-                    monument.checked_ = 0;
-                if (checkedListBox1.CheckedIndices.Contains(2))
-                    chruch.checked_ = 1;
-                else
-                    chruch.checked_ = 0;
-                if (checkedListBox1.CheckedIndices.Contains(3))
-                    park.checked_ = 1;
-                else
-                    park.checked_ = 0;
-                if (checkedListBox1.CheckedIndices.Contains(4))
-                    museum.checked_ = 1;
-                else
-                    museum.checked_ = 0;
-                if (checkedListBox1.CheckedIndices.Contains(5))
-                    museum.checked_ = 1;
-                else
-                    museum.checked_ = 0; 
-            }
         }
 
         private void btnGetFiler_Click(object sender, EventArgs e)
         {
+
+
+            foreach (Object item in checkedListBox1.Items)
+            {
+                int index = checkedListBox1.Items.IndexOf(item);
+                Filter filter = filters.FirstOrDefault(f => f.name.Equals(item));
+                filter.checked_ = 0;
+            }
+
+            foreach (Object item in checkedListBox1.CheckedItems)
+            {
+                int index = checkedListBox1.Items.IndexOf(item);
+                Filter filter = filters.FirstOrDefault(f => f.name.Equals(item));
+                filter.checked_ = 1;
+            }
+
+            
+            flowLayoutPanel1.Controls.Clear();
+            string allFilter = "";
             foreach (Filter filter in filters)
             {
-                
+                allFilter = allFilter + filter.GetFilter();
             }
             DBcon db = new DBcon();
             db.openConnection();
-            MySqlCommand command = new MySqlCommand("SELECT * FROM attractions WHERE removed = 0", db.getConnection()); // sql комманда
+            MySqlCommand command = new MySqlCommand();
+            if (textBoxSearch.Text.Length == 0)
+            {
+                command = new MySqlCommand($"SELECT * FROM attractions WHERE adress LIKE '%{comboBox1.Text}%' AND removed = 0{allFilter}", db.getConnection());
+            }
+            else
+            {
+                command = new MySqlCommand($"SELECT * FROM attractions WHERE adress LIKE '%{comboBox1.Text}%' AND name LIKE '%{textBoxSearch.Text}%' AND removed = 0{allFilter}", db.getConnection()); // sql комманда
+                
+            }
             MySqlDataReader reader = command.ExecuteReader();
+
             MySqlDataReader s;
             // путь к файлу
             //string path = $"..\\..\\Resources\\{(string)reader["image"]}";
@@ -391,6 +383,16 @@ namespace attractionsApp
             }
 
             db.closeConnection();
+        }
+
+        private void checkedListBox1_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
         }
     }
 }

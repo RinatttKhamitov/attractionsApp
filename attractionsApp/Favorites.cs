@@ -57,13 +57,17 @@ namespace attractionsApp
                 
             }
             db.closeConnection();
-            db.openConnection();
+            if (ids.Count == 0)
+                return;
 
+            db.openConnection();
+            
             string query = "SELECT * FROM attractions WHERE id IN (" + string.Join(", ", ids.ToArray()) + ")";
             command = new MySqlCommand(query, db.getConnection()); // sql комманда
             MySqlDataReader reader = command.ExecuteReader();
             MySqlDataReader s;
             // путь к файлу
+
             //string path = $"..\\..\\Resources\\{(string)reader["image"]}";
 
 
