@@ -18,6 +18,7 @@ using static System.Net.Mime.MediaTypeNames;
 using MySqlX.XDevAPI.Relational;
 using System.Xml.Linq;
 using static System.Net.WebRequestMethods;
+using System.Data.SqlClient;
 
 namespace attractionsApp
 {
@@ -392,7 +393,111 @@ namespace attractionsApp
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            RecomFilter museum = new RecomFilter("museum", 0);
+            RecomFilter monument = new RecomFilter("monument", 0);
+            RecomFilter church = new RecomFilter("church", 0);
+            RecomFilter park = new RecomFilter("park", 0);
+            RecomFilter nature = new RecomFilter("nature", 0);
+            RecomFilter mall = new RecomFilter("mall", 0);
+            
 
+            DBcon db = new DBcon();
+            db.openConnection();
+            int id_user;
+            using (StreamReader readerr = new StreamReader($"..\\..\\Resources\\account.txt"))
+            {
+                string text = readerr.ReadLine().Split(';')[0];
+                id_user = int.Parse(text);
+            }
+
+
+            MySqlCommand command = new MySqlCommand("SELECT * FROM favorites WHERE Id_user = @userId AND removed = 0", db.getConnection());
+            command.Parameters.AddWithValue("@userId", id_user);
+
+            MySqlDataReader reader = command.ExecuteReader();
+            List<int> ids = new List<int>();
+
+
+            while (reader.Read())
+            {
+                int idAt = (int)reader["id_attraction"];
+                ids.Add(idAt);
+            }
+            db.closeConnection();
+            db.openConnection();
+            if (ids.Count == 0)
+            {
+                return;
+            }
+            MySqlCommand command2 = new MySqlCommand("SELECT * FROM attractions WHERE id IN (" + string.Join(",", ids) + ")", db.getConnection());
+            MySqlDataReader reader2 = command2.ExecuteReader();
+            while (reader2.Read())
+            {
+                museum.count += (int)reader2["museum"];
+                monument.count += (int)reader2["monument"];
+                church.count += (int)reader2["church"];
+                park.count += (int)reader2["park"];
+                nature.count += (int)reader2["nature"];
+                mall.count += (int)reader2["nature"];
+            }
+            db.closeConnection();
+            db.openConnection();
+            List<RecomFilter> allRecom = new List<RecomFilter>() { museum, monument, church, park, nature, mall };
+            string c = GetRecom(allRecom);
+            if (c.Length == 0)
+            {
+                return;
+            }
+
+            MySqlCommand command3 = new MySqlCommand($"SELECT * FROM attractions ORDER BY {c}", db.getConnection());
+            MySqlDataReader reader3 = command3.ExecuteReader();
+
+
+            flowLayoutPanel1.Controls.Clear();
+
+            while (reader3.Read())
+            {
+                // обработка результата запроса
+                int id = reader3.GetInt32(0);
+                string name = reader3.GetString(1);
+                string image = reader3.GetString(2);
+                string path = $"..\\..\\Resources\\{image}";
+                AddAttractionPanel(id, name, path);
+            }
+            reader.Close();
+            db.closeConnection();
+
+            MessageBox.Show(museum.ToString()); 
+        }
+
+        string GetRecom(List<RecomFilter> listRecom)
+        {
+            string c = "";
+            while (listRecom.Count > 0)
+            {
+                int maxIndex = listRecom.IndexOf(listRecom.OrderByDescending(x => x.count).FirstOrDefault());
+                c = c + $"{listRecom[maxIndex].name} DESC, ";
+                listRecom.RemoveAt(maxIndex);
+
+            }
+            if (c.Length != 0)
+            {
+                return c.Substring(0, c.Length - 2);
+            }
+            else
+            {
+                return "";
+            }
+        }
+    }
+    class RecomFilter
+    {
+        public string name;
+        public int count;
+        public RecomFilter(string Name, int Count)
+        {
+            name = Name;
+            count = Count;
         }
     }
 }
