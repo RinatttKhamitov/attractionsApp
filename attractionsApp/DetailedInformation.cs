@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -29,17 +30,20 @@ namespace attractionsApp
             string name = "";
             string path = "";
             string description = "";
+            string addres = "";
             if (reader.Read())
             {
                 // получаем значения полей текущей строки
                 name = reader.GetString(1);
                 path = $"..\\..\\Resources\\{reader.GetString(2)}";
                 description = reader.GetString(3);
+                addres = reader.GetString(4);
 
             }
             textBoxName.Text = name;
             pictureBox.Image = Image.FromFile(path);
             textBoxKrOp.Text = description;
+            textBoxAdress.Text = addres;
 
 
         }

@@ -34,7 +34,7 @@ namespace attractionsApp
                     // Create a new Bitmap object from the picture file on disk,
                     // and assign that to the PictureBox.Image property
                     path = dlg.FileName;
-                    pictureBox.Image = new Bitmap(dlg.FileName);
+                    pictureBox.Image = System.Drawing.Image.FromFile(dlg.FileName);
                 }
             }
         }
@@ -68,14 +68,25 @@ namespace attractionsApp
 
             MySqlDataAdapter adapter = new MySqlDataAdapter();
             db.openConnection();
+
+            string pathUser = $"..\\..\\Resources\\account.txt";
+            int id_user;
+            using (StreamReader reader2 = new StreamReader(pathUser))
+            {
+                string text = reader2.ReadLine().Split(';')[0];
+                id_user = int.Parse(text);
+            }
+
             string[] spPath = path.Split('\\');
             string nameFile = spPath[spPath.Length - 1];
-            MySqlCommand command = new MySqlCommand("INSERT INTO `attractions_db`.`attractions` (`name`, `image`, `description`,  `adress`, `museum`, `monument`, `church`, `park`, `nature`, `mall`) VALUES (@aN, @aI, @aD, @aA, @aMu, @aMo, @aC, @aP, @aNa, @aMa)", db.getConnection());
+            MySqlCommand command = new MySqlCommand("INSERT INTO `attractions_db`.`attractions` (`name`, `image`, `description`,  `adress`,`whoAdded`, `removed`, `museum`, `monument`, `church`, `park`, `nature`, `mall`) VALUES (@aN, @aI, @aD, @aA,@aWh, @aRem, @aMu, @aMo, @aC, @aP, @aNa, @aMa)", db.getConnection());
             // @aN, @aI, @aMu, @aMo, @aC, @aP, @aN, @aMa
             command.Parameters.Add("@aN", MySqlDbType.VarChar).Value = textBox1.Text;
             command.Parameters.Add("@aI", MySqlDbType.VarChar).Value = nameFile;
             command.Parameters.Add("@aD", MySqlDbType.VarChar).Value = textBox3.Text;
             command.Parameters.Add("@aA", MySqlDbType.VarChar).Value = textBox2.Text;
+            command.Parameters.Add("@aWh", MySqlDbType.VarChar).Value = id_user;
+            command.Parameters.Add("@aRem", MySqlDbType.VarChar).Value = 0;
             command.Parameters.Add("@aMu", MySqlDbType.VarChar).Value = select[0];
             command.Parameters.Add("@aMo", MySqlDbType.VarChar).Value = select[1];
             command.Parameters.Add("@aC", MySqlDbType.VarChar).Value = select[2];
@@ -93,6 +104,10 @@ namespace attractionsApp
             {
                 MessageBox.Show("Аккаунт не был создан");
 
+            }
+            if (File.Exists($"..\\..\\Resources\\{nameFile}"))
+            {
+                return;
             }
             File.Copy(path, $"..\\..\\Resources\\{nameFile}");
             db.closeConnection();

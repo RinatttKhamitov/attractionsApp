@@ -16,7 +16,14 @@ namespace attractionsApp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainWindow());
+            Authorization authorization = new Authorization();
+            Application.Run(authorization);
+            
         }
+        public static void Exit()
+        {
+            Application.Exit();
+        }
+        
     }
 }

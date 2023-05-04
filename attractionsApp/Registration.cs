@@ -56,10 +56,12 @@ namespace attractionsApp
 
             MySqlDataAdapter adapter = new MySqlDataAdapter();
 
-            MySqlCommand command = new MySqlCommand("INSERT INTO `attractions_db`.`users` (`user`, `password`, `mail`) VALUES (@uL, @uP, @uM);", db.getConnection());
+            MySqlCommand command = new MySqlCommand("INSERT INTO `attractions_db`.`users` (`user`, `password`, `mail`, `image`, `removed`) VALUES (@uL, @uP, @uM, @uI, @uR);", db.getConnection());
             command.Parameters.Add("@uL", MySqlDbType.VarChar).Value = textUser;
             command.Parameters.Add("@uP", MySqlDbType.VarChar).Value = textPassword;
             command.Parameters.Add("@uM", MySqlDbType.VarChar).Value = textMail;
+            command.Parameters.Add("@uI", MySqlDbType.VarChar).Value = "icon.png";
+            command.Parameters.Add("@uR", MySqlDbType.VarChar).Value = 0;
             adapter.SelectCommand = command;
 
 

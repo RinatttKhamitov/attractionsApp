@@ -35,7 +35,7 @@ namespace attractionsApp
 
         Filter museum = new Filter("museum","музей", 0);
         Filter monument = new Filter("monument", "памятник", 0);
-        Filter church = new Filter("church", "церковь", 0);
+        Filter church = new Filter("church", "религия", 0);
         Filter park = new Filter("park", "парк", 0);
         Filter nature = new Filter("nature", "природа", 0);
         Filter mall = new Filter("mall", "торговый центр", 0);
@@ -374,14 +374,14 @@ namespace attractionsApp
             foreach (Object item in checkedListBox1.Items)
             {
                 int index = checkedListBox1.Items.IndexOf(item);
-                Filter filter = filters.FirstOrDefault(f => f.name.Equals(item));
+                Filter filter = filters.FirstOrDefault(f => f.name.Equals(item.ToString()));
                 filter.checked_ = 0;
             }
 
             foreach (Object item in checkedListBox1.CheckedItems)
             {
                 int index = checkedListBox1.Items.IndexOf(item);
-                Filter filter = filters.FirstOrDefault(f => f.name.Equals(item));
+                Filter filter = filters.FirstOrDefault(f => f.name.Equals(item.ToString()));
                 filter.checked_ = 1;
             }
 
@@ -488,7 +488,7 @@ namespace attractionsApp
                 return;
             }
 
-            MySqlCommand command3 = new MySqlCommand($"SELECT * FROM attractions ORDER BY {c}", db.getConnection());
+            MySqlCommand command3 = new MySqlCommand($"SELECT * FROM attractions WHERE removed = 0 ORDER BY {c}", db.getConnection());
             MySqlDataReader reader3 = command3.ExecuteReader();
 
 
@@ -527,6 +527,11 @@ namespace attractionsApp
             {
                 return "";
             }
+        }
+
+        private void MainWindow_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Program.Exit();
         }
     }
     class RecomFilter

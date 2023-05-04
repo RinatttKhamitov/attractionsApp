@@ -150,7 +150,7 @@
             this.btnGetFiler.Name = "btnGetFiler";
             this.btnGetFiler.Size = new System.Drawing.Size(34, 23);
             this.btnGetFiler.TabIndex = 12;
-            this.btnGetFiler.Text = "поиск";
+            this.btnGetFiler.Text = "🔍";
             this.btnGetFiler.UseVisualStyleBackColor = true;
             this.btnGetFiler.Click += new System.EventHandler(this.btnGetFiler_Click);
             // 
@@ -191,7 +191,7 @@
             this.checkedListBox1.Items.AddRange(new object[] {
             "музей",
             "памятник",
-            "церковь",
+            "религия",
             "парк",
             "природа",
             "торговый центр"});
@@ -280,6 +280,7 @@
             this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "MainWindow";
             this.Text = " ";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainWindow_FormClosed);
             this.Load += new System.EventHandler(this.MainWindow_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.panel.ResumeLayout(false);

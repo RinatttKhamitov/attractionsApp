@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,7 +32,7 @@ namespace attractionsApp
 
 
             DBcon db = new DBcon();
-
+            db.openConnection();
             DataTable table = new DataTable();
 
             MySqlDataAdapter adapter = new MySqlDataAdapter();
@@ -41,18 +42,30 @@ namespace attractionsApp
             command.Parameters.Add("@uL", MySqlDbType.VarChar).Value = textUser;
             command.Parameters.Add("@uP", MySqlDbType.VarChar).Value = textPassword;
 
-            adapter.SelectCommand = command;
-            adapter.Fill(table);
-           
+            MySqlDataReader reader = command.ExecuteReader();
+            
 
-            if (table.Rows.Count > 0)
+            if (reader.Read())
             {
+                Hide();
+
+                string path = $"..\\..\\Resources\\account.txt";
+                string text = $"{reader["id"].ToString()};{reader["user"].ToString()};{reader["password"].ToString()}";
+
+                // полная перезапись файла 
+                using (StreamWriter writer = new StreamWriter(path, false))
+                {
+                    writer.WriteLine(text);
+                }
+
                 MainWindow form1 = new MainWindow();
                 form1.Show();
+                db.closeConnection();
             }
             else
             {
-                MessageBox.Show("2");
+                MessageBox.Show("Ошибка: Неверный логин или пароль");
+                db.closeConnection();
             }
         }
 
