@@ -279,7 +279,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "MainWindow";
-            this.Text = "Form1";
+            this.Text = " ";
             this.Load += new System.EventHandler(this.MainWindow_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.panel.ResumeLayout(false);

@@ -64,6 +64,7 @@
             // 
             this.textBoxName.Location = new System.Drawing.Point(47, 183);
             this.textBoxName.Name = "textBoxName";
+            this.textBoxName.ReadOnly = true;
             this.textBoxName.Size = new System.Drawing.Size(201, 20);
             this.textBoxName.TabIndex = 3;
             // 
@@ -89,6 +90,7 @@
             // 
             this.textBoxAdress.Location = new System.Drawing.Point(47, 225);
             this.textBoxAdress.Name = "textBoxAdress";
+            this.textBoxAdress.ReadOnly = true;
             this.textBoxAdress.Size = new System.Drawing.Size(201, 20);
             this.textBoxAdress.TabIndex = 5;
             // 
@@ -103,9 +105,12 @@
             // 
             // textBoxKrOp
             // 
+            this.textBoxKrOp.AllowDrop = true;
             this.textBoxKrOp.Location = new System.Drawing.Point(47, 269);
             this.textBoxKrOp.Multiline = true;
             this.textBoxKrOp.Name = "textBoxKrOp";
+            this.textBoxKrOp.ReadOnly = true;
+            this.textBoxKrOp.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBoxKrOp.Size = new System.Drawing.Size(201, 91);
             this.textBoxKrOp.TabIndex = 7;
             // 
@@ -143,6 +148,7 @@
             this.Controls.Add(this.textBoxName);
             this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.lblImage);
+            this.MaximizeBox = false;
             this.Name = "DetailedInformation";
             this.Text = "DetailedInformation";
             this.Load += new System.EventHandler(this.DetailedInformation_Load);

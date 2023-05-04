@@ -29,7 +29,7 @@ namespace attractionsApp
             filters = new List<Filter>() {museum, monument, church, park, nature, mall };
             InitializeComponent();
             GetInfoForAddAttraction();
-
+            ChangeAvatar();
 
         }
 
@@ -42,6 +42,40 @@ namespace attractionsApp
         List<Filter> filters;
         private List<PictureBox> pictureBoxes = new List<PictureBox>() { };
 
+        public void ChangeAvatar()
+        {
+            string path = $"..\\..\\Resources\\account.txt";
+            int id_user;
+            using (StreamReader reader2 = new StreamReader(path))
+            {
+                string text = reader2.ReadLine().Split(';')[0];
+                id_user = int.Parse(text);
+            }
+            DBcon db = new DBcon();
+            db.openConnection();
+            DataTable table = new DataTable();
+
+            MySqlDataAdapter adapter = new MySqlDataAdapter();
+            MySqlCommand command = new MySqlCommand("SELECT * FROM users WHERE id = @uI", db.getConnection());
+            //MySqlCommand command = new MySqlCommand("SELECT * FROM users", db.getConnection());
+            command.Parameters.Add("@uI", MySqlDbType.Int32).Value = id_user;
+            adapter.SelectCommand = command;
+            adapter.Fill(table);
+            MySqlDataReader reader = command.ExecuteReader();
+            string im_path = "";
+            while (reader.Read())
+            {
+                // обработка результата запроса
+                string image = reader.GetString(4);
+                im_path = $"..\\..\\Resources\\{image}";
+            }
+            db.closeConnection();
+            System.Drawing.Drawing2D.GraphicsPath gp = new System.Drawing.Drawing2D.GraphicsPath();
+            gp.AddEllipse(0, 0, pictureBox1.Width - 3, pictureBox1.Height - 3);
+            Region rg = new Region(gp);
+            pictureBox1.Region = rg;
+            pictureBox1.Image = System.Drawing.Image.FromFile(im_path);
+        }
         public void GetInfoForAddAttraction()
         {
             DBcon db = new DBcon();
@@ -88,6 +122,11 @@ namespace attractionsApp
             lblName.Name = "lblName";
             lblName.Size = new Size(35, 13);
             lblName.TabIndex = 1;
+
+            if (name.Length > 28)
+            {
+                name = name.Substring(0, 28) + "...";
+            }
             lblName.Text = name;
 
             // создание элемента ссылка на подробную информацию
